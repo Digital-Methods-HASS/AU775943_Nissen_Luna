@@ -1,0 +1,48 @@
+install.packages("tidyverse")
+install.packages("ggplot2")
+install.packages("readr")
+library(tidyverse)
+library(ggplot2)
+
+names(Western_Europe)[4] <- "homicides_per_100k"
+ggplot(data = Western_Europe, 
+       aes(x = Year, y = homicides_per_100k, color = Entity)) +
+  geom_line() +
+  labs(
+    title = "Long-term homicide rates in Western Europe",
+    x = "Year",
+    y = "Homicides per 100,000 people",
+    color = "Country"
+  )
+ggplot(data = Western_Europe,
+       aes(x = Year, y = homicides_per_100k, color = Entity)) +
+  geom_line() +
+  facet_wrap(~Entity, ncol = 2, nrow = 3) +
+  labs(
+    title = "Long-term homicide rates by country",
+    x = "Year",
+    y = "Homicides per 100,000 people",
+    color = "Country"
+  )
+names(kings)
+kings <- kings %>%
+  mutate(Midyear = End_date - (End_date - Start_date)/2)
+ggplot(kings, aes(x = Midyear, y = Duration)) +
+  geom_smooth() +
+  labs(
+    title = "Duration of reign among Danish rulers",
+    x = "Midyear of reign",
+    y = "Duration of reign (years)"
+  )
+
+ggplot(data = Western_Europe,
+       aes(x = Year, y = homicides_per_100k, color = Entity)) +
+  geom_line() +
+  facet_wrap(~Entity, ncol = 2, nrow = 3) +
+  labs(
+    title = "Long-term homicide rates by country",
+    x = "Year",
+    y = "Homicides per 100,000 people",
+    color = "Country"
+  ) +
+  theme(legend.position = "bottom")
